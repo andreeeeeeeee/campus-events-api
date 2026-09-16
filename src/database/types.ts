@@ -7,11 +7,11 @@ export const Person = z.object({
 export type Person = z.infer<typeof Person>;
 
 const EventBase = z.object({
-  title: z.string().trim().min(1),
+  title: z.string().trim().min(1).max(255),
   starts_at: z.coerce.date(),
   ends_at: z.coerce.date(),
-  room: z.string().trim().min(1),
-  organizer: z.string().trim().min(1),
+  room: z.string().trim().min(1).max(255),
+  organizer: z.string().trim().min(1).max(255),
 });
 
 export const EventInput = EventBase.refine((event) => event.ends_at > event.starts_at, {
