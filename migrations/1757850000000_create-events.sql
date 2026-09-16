@@ -1,0 +1,13 @@
+-- Up Migration
+CREATE TABLE events (
+  id          INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  title       VARCHAR(255) NOT NULL,
+  starts_at   TIMESTAMP WITH TIME ZONE NOT NULL,
+  ends_at     TIMESTAMP WITH TIME ZONE NOT NULL,
+  room        VARCHAR(255) NOT NULL,
+  organizer   VARCHAR(255) NOT NULL,
+  created_at  TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+);
+
+-- Down Migration
+DROP TABLE events;

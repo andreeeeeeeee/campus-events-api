@@ -3,6 +3,7 @@ import { Queries } from './database/queries';
 import { Middleware } from './middleware';
 import { makePeopleRoutes } from './routes/people';
 import { makeHealthRoutes } from './routes/health';
+import { makeEventsRoutes } from './routes/events';
 
 export interface AppContext {
   queries: Queries;
@@ -16,6 +17,7 @@ export function makeApp(ctx: AppContext): Express {
 
   app.use('/health', makeHealthRoutes(ctx));
   app.use('/people', makePeopleRoutes(ctx));
+  app.use('/events', makeEventsRoutes(ctx));
 
   app.use(ctx.middleware.routeNotFound);
   app.use(ctx.middleware.errorHandler);
