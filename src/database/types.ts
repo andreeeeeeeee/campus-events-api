@@ -8,8 +8,8 @@ export type Person = z.infer<typeof Person>;
 
 const EventBase = z.object({
   title: z.string().trim().min(1).max(255),
-  starts_at: z.coerce.date(),
-  ends_at: z.coerce.date(),
+  starts_at: z.string().pipe(z.coerce.date()),
+  ends_at: z.string().pipe(z.coerce.date()),
   room: z.string().trim().min(1).max(255),
   organizer: z.string().trim().min(1).max(255),
 });
