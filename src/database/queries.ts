@@ -7,6 +7,7 @@ export interface Queries {
   getAllPeople(): Promise<Person[]>;
   addPerson(person: Person): Promise<Person>;
   addEvent(event: EventInput): Promise<Event>;
+  listEventsByRoom(room: string): Promise<Event[]>;
 }
 
 export const makeQueries = (databaseUrl: string): Queries => {
@@ -57,6 +58,17 @@ export const makeQueries = (databaseUrl: string): Queries => {
         throw new HttpError(500, 'Something went wrong');
       }
       return rows[0];
+    },
+    listEventsByRoom: async (room) => {
+      const { rows } = await pool.query<Event, [string]>(
+        `
+        SELECT id, title, starts_at, ends_at, room, organizer, created_at
+        FROM events
+        WHERE room = $1
+        `,
+        [room],
+      );
+      return rows;
     },
   };
 };
