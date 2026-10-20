@@ -6,3 +6,6 @@
 
 # typescript build folder
 /dist
+
+# test coverage report
+/coverage
