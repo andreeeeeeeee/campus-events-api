@@ -6,20 +6,22 @@
 
 ## Table of contents
 
-- [Features](#features)
-- [How to use](#how-to-use)
-  - [Requirements](#requirements)
-  - [Getting started](#getting-started)
-  - [Scripts](#scripts)
-  - [Default routes](#default-routes)
-- [Directory structure](#directory-structure)
-- [Consistent error handling](#consistent-error-handling)
-  - [Throwing consistent errors](#throwing-consistent-errors)
-  - [Error handler middleware](#error-handler-middleware)
-- [Testing](#testing)
-  - [Running tests](#running-tests)
-  - [Automated tests](#automated-tests)
-- [Continuous integration](#continuous-integration)
+- [Node.js API Template](#nodejs-api-template)
+  - [Table of contents](#table-of-contents)
+  - [Features](#features)
+  - [How to use](#how-to-use)
+    - [Requirements](#requirements)
+    - [Getting started](#getting-started)
+    - [Scripts](#scripts)
+    - [Default routes](#default-routes)
+  - [Directory structure](#directory-structure)
+  - [Consistent error handling](#consistent-error-handling)
+    - [Throwing consistent errors](#throwing-consistent-errors)
+    - [Error handler middleware](#error-handler-middleware)
+  - [Testing](#testing)
+    - [Running tests](#running-tests)
+    - [Automated tests](#automated-tests)
+  - [Continuous integration](#continuous-integration)
 
 ## Features
 
@@ -47,27 +49,38 @@
 ### Getting started
 
 1. Clone the repository:
-   ```
+
+   ```cmd
    git clone https://github.com/miikkaylisiurunen/template-node-express.git
    ```
+
 2. Change to the project directory:
-   ```
+
+   ```cmd
    cd template-node-express
    ```
+
 3. Copy `.env.example` to `.env`:
-   ```
+
+   ```cmd
    cp .env.example .env
    ```
+
 4. Install npm packages:
-   ```
+
+   ```cmd
    npm install
    ```
+
 5. Start the database services with Docker Compose:
-   ```
+
+   ```cmd
    npm run db:up
    ```
+
 6. Start the development server:
-   ```
+
+   ```cmd
    npm run dev
    ```
 
@@ -75,7 +88,7 @@
 
 ### Scripts
 
-```
+```cmd
 start       # start the production server
 dev         # start the development server
 build       # build the project using tsc
@@ -88,7 +101,7 @@ db:down     # stop and remove the database services
 
 ### Default routes
 
-```
+```HTTP
 GET /people         # get all people from the database
 POST /people        # add a new person with required body properties: "name" and "age"
 
@@ -98,7 +111,7 @@ GET /health/deep    # complete health check (api status + database connection)
 
 ## Directory structure
 
-```
+```n/a
 .
 ├── .github          # CI workflows and dependabot config to keep npm packages up to date
 ├── migrations       # database migration scripts
@@ -138,7 +151,7 @@ This template comes with tests powered by [Vitest](https://vitest.dev) and [Supe
 
 You can manually run tests with the following command:
 
-```
+```cmd
 npm test
 ```
 
@@ -150,11 +163,11 @@ A GitHub Actions workflow is included to automatically run tests. Refer to the [
 
 ## Continuous integration
 
-This template comes with pre-configured GitHub Actions workflows to automate continuous integration (CI) and ensure that your code is always tested before being merged into the main branch. The workflows run automatically on every push to the `main` branch, or when a pull request is opened, reopened, or synchronized.
+This template comes with pre-configured GitHub Actions workflows to automate continuous integration (CI) and ensure that your code is always tested before being merged into the main branch. The workflows run automatically on every push to any branch, and when a pull request is opened, reopened, or synchronized. A newer run for the same ref cancels the previous one.
 
 The workflows included are:
 
-- `ci.yml` - Runs tests and builds the project, preventing issues and bugs from making their way into production.
-- `lint.yml` - Runs ESLint to find linting issues, ensuring that your code is always in compliance with your ESLint rules, which can improve code quality and consistency.
+- `ci.yml` - Installs dependencies, builds the project, and runs tests on Node.js 20 and 22. On Node.js 22 it also generates a coverage report and uploads it as the `coverage-report` artifact. npm downloads are cached from `package-lock.json`.
+- `lint.yml` - Installs dependencies and runs ESLint to find linting issues, ensuring that your code is always in compliance with your ESLint rules, which can improve code quality and consistency. npm downloads are cached from `package-lock.json`.
 
 Additionally, a `dependabot.yml` configuration is included and run automatically on a weekly basis. It detects outdated npm packages and creates pull requests to update them, ensuring that your npm packages are always up to date, which can improve security and prevent bugs caused by outdated packages.
