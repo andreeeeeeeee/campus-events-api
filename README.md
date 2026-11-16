@@ -1,12 +1,12 @@
-# Node.js API Template
+# Campus Events API
 
-> A Node.js API template with Express, TypeScript and PostgreSQL
+> API de eventos do campus com Express, TypeScript e PostgreSQL, publicada no Render
 
-[![CI](https://github.com/miikkaylisiurunen/template-node-express/actions/workflows/ci.yml/badge.svg)](https://github.com/miikkaylisiurunen/template-node-express/actions/workflows/ci.yml)
+**URL pública:** https://campus-events-api-8wlm.onrender.com
 
 ## Table of contents
 
-- [Node.js API Template](#nodejs-api-template)
+- [Campus Events API](#campus-events-api)
   - [Table of contents](#table-of-contents)
   - [Features](#features)
   - [How to use](#how-to-use)
@@ -14,6 +14,10 @@
     - [Getting started](#getting-started)
     - [Scripts](#scripts)
     - [Default routes](#default-routes)
+  - [Deploy](#deploy)
+    - [Variáveis de ambiente](#variáveis-de-ambiente)
+    - [Como foi publicado](#como-foi-publicado)
+    - [Como acessar e validar](#como-acessar-e-validar)
   - [Directory structure](#directory-structure)
   - [Consistent error handling](#consistent-error-handling)
     - [Throwing consistent errors](#throwing-consistent-errors)
@@ -22,6 +26,7 @@
     - [Running tests](#running-tests)
     - [Automated tests](#automated-tests)
   - [Continuous integration](#continuous-integration)
+  
 
 ## Features
 
@@ -105,9 +110,12 @@ db:down     # stop and remove the database services
 GET /people         # get all people from the database
 POST /people        # add a new person with required body properties: "name" and "age"
 
+POST /events        # add a new event with required body properties: "title", "starts_at", "ends_at", "room" and "organizer"
+
 GET /health         # basic health check (api status)
 GET /health/deep    # complete health check (api status + database connection)
 ```
+
 
 ## Directory structure
 
@@ -171,3 +179,10 @@ The workflows included are:
 - `lint.yml` - Installs dependencies and runs ESLint to find linting issues, ensuring that your code is always in compliance with your ESLint rules, which can improve code quality and consistency. npm downloads are cached from `package-lock.json`.
 
 Additionally, a `dependabot.yml` configuration is included and run automatically on a weekly basis. It detects outdated npm packages and creates pull requests to update them, ensuring that your npm packages are always up to date, which can improve security and prevent bugs caused by outdated packages.
+
+## Deploy
+
+- **URL pública:** https://campus-events-api-8wlm.onrender.com
+- **Plataforma:** Render (Docker + PostgreSQL gerenciado)
+- **Documentação completa e evidências:** [docs/deploy.md](docs/deploy.md)
+- **Pesquisa sobre alternativas de deploy:** [docs/alternativas-deploy.md](docs/alternativas-deploy.md)
